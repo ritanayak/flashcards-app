@@ -1,0 +1,862 @@
+
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #f1f1f1;
+    --font-family: 'Arial', sans-serif;
+    --sidebar-width: 250px;
+    --card-height: 300px;
+    --transition-duration: 0.6s;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-family);
+    background-color: var(--secondary-color);
+}
+
+.container {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr;
+    height: 100vh;
+}
+
+.sidebar {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sidebar-header h2 {
+    margin: 0;
+}
+
+.btn-new-deck {
+    background-color: white;
+    color: var(--primary-color);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.btn-new-deck:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-new-deck:focus {
+    outline: 3px solid #333;
+    outline-offset: 2px;
+}
+
+.deck-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.deck-item {
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.deck-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.deck-item.active {
+    background-color: white;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.deck-item-actions {
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.deck-item:hover .deck-item-actions {
+    opacity: 1;
+}
+
+.deck-action-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+.deck-action-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.15);
+}
+
+.deck-action-btn:focus {
+    outline: 2px solid #333;
+    outline-offset: 1px;
+}
+
+.main {
+    padding: 20px;
+    overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: none;
+    }
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin: -20px -20px 20px -20px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    flex: 1;
+}
+
+header button {
+    background-color: white;
+    color: var(--primary-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+header button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+header button:focus {
+    outline: 3px solid #333;
+    outline-offset: 2px;
+}
+
+.deck-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.deck-title-section {
+    margin-bottom: 20px;
+}
+
+.deck-title-section h2 {
+    margin: 0;
+    color: #333;
+}
+
+.toolbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.search-box:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.search-container {
+    margin-bottom: 20px;
+}
+
+/* ==================== SEARCH HIGHLIGHTS ==================== */
+
+mark {
+    background-color: #fff3cd;
+    color: #333;
+    padding: 0 2px;
+    border-radius: 2px;
+    font-weight: 600;
+}
+
+.card-text mark {
+    background-color: #ffeb3b;
+    color: #000;
+    font-weight: 700;
+}
+
+.toolbar-btn {
+    padding: 10px 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.toolbar-btn:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.toolbar-btn:focus {
+    outline: 3px solid #333;
+    outline-offset: 2px;
+}
+
+.card-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    min-height: 300px;
+}
+
+.card-placeholder {
+    text-align: center;
+    color: #999;
+    font-size: 18px;
+}
+
+/* ==================== CARD FLIP ANIMATION ==================== */
+
+.card {
+    width: 100%;
+    max-width: 500px;
+    height: var(--card-height);
+    perspective: 1000px;
+    cursor: pointer;
+    position: relative;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform var(--transition-duration) ease;
+    transform-style: preserve-3d;
+}
+
+.card.is-flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.card:hover .card-content {
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+    transform: translateY(-4px);
+}
+
+.card.is-flipped .card-content {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.card-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0 0 15px 0;
+    opacity: 0.8;
+}
+
+.card-text {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+    word-wrap: break-word;
+    line-height: 1.5;
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+.card-text p {
+    margin: 0;
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.control-btn {
+    padding: 12px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
+}
+
+.control-btn:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.control-btn:focus {
+    outline: 3px solid #333;
+    outline-offset: 2px;
+}
+
+.control-btn.active {
+    background-color: #ff9800;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.control-btn.active:hover {
+    background-color: #fb8c00;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.flip-btn {
+    background-color: #ff9800;
+}
+
+.flip-btn:hover {
+    background-color: #fb8c00;
+}
+
+.card-counter {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* ==================== MODAL STYLES ==================== */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    z-index: 1;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: #333;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.2s ease;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    color: #333;
+    transform: scale(1.2);
+}
+
+.modal-close:focus {
+    outline: 2px solid #333;
+    outline-offset: 2px;
+}
+
+.modal-body {
+    margin-bottom: 20px;
+}
+
+.modal-body p {
+    margin: 0;
+    color: #666;
+    line-height: 1.6;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-danger {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:focus {
+    outline: 3px solid #333;
+    outline-offset: 2px;
+}
+
+.btn-secondary {
+    background-color: #f1f1f1;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+    background-color: #e0e0e0;
+}
+
+.btn-secondary:focus {
+    outline: 3px solid #333;
+    outline-offset: 2px;
+}
+
+.btn-danger {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #da190b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-danger:focus {
+    outline: 3px solid #333;
+    outline-offset: 2px;
+}
+
+.modal-danger .modal-content {
+    border-left: 4px solid #f44336;
+}
+
+/* ==================== UTILITY STYLES ==================== */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    .toolbar {
+        flex-direction: column;
+    }
+
+    .search-box {
+        min-width: auto;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .control-btn {
+        width: 100%;
+    }
+
+    .card-text {
+        font-size: 20px;
+    }
+
+    .modal-content {
+        max-width: 90%;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #1e88e5;
+        --secondary-color: #121212;
+    }
+
+    body {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+    }
+
+    .sidebar {
+        background-color: var(--primary-color);
+    }
+
+    header {
+        background-color: var(--primary-color);
+    }
+
+    .deck-title-section h2 {
+        color: #e0e0e0;
+    }
+
+    .modal-content {
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+    }
+
+    .modal-header h2 {
+        color: #e0e0e0;
+    }
+
+    .form-input {
+        background-color: #3a3a3a;
+        border-color: #4a4a4a;
+        color: #e0e0e0;
+    }
+
+    .form-input:focus {
+        border-color: var(--primary-color);
+    }
+
+    .btn-secondary {
+        background-color: #3a3a3a;
+        color: #e0e0e0;
+        border-color: #4a4a4a;
+    }
+
+    .btn-secondary:hover {
+        background-color: #4a4a4a;
+    }
+}
+
+/* ==================== EMPTY STATE MESSAGES ==================== */
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+    color: #666;
+}
+
+.empty-state-message {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0 0 15px 0;
+    color: #333;
+}
+
+.empty-state-instructions {
+    font-size: 16px;
+    margin: 0;
+    color: #777;
+    max-width: 400px;
+    line-height: 1.6;
+}
+
+/* Sidebar empty state */
+nav .empty-state {
+    padding: 30px 15px;
+    font-size: 14px;
+}
+
+nav .empty-state-message {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+nav .empty-state-instructions {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+}
+
+/* Main content empty state */
+.card-container {
+    position: relative;
+}
+
+.card-container .empty-state {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* ==================== ENHANCED ACCESSIBILITY & FOCUS STYLES ==================== */
+
+/* WCAG AA compliant focus indicators (minimum 3:1 contrast) */
+
+/* Primary buttons - Green focus ring */
+button, input[type="button"], input[type="submit"] {
+    position: relative;
+}
+
+button:focus-visible, 
+input[type="button"]:focus-visible, 
+input[type="submit"]:focus-visible {
+    outline: 3px solid #1a3a1a;
+    outline-offset: 2px;
+}
+
+/* Input fields - Green focus ring */
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+textarea {
+    position: relative;
+}
+
+input[type="text"]:focus-visible, 
+input[type="email"]:focus-visible, 
+input[type="password"]:focus-visible, 
+textarea:focus-visible {
+    outline: 3px solid #1a3a1a;
+    outline-offset: 1px;
+}
+
+/* Override previous focus styles with WCAG AA compliant ones */
+
+header button:focus,
+header button:focus-visible {
+    outline: 3px solid #1a3a1a;
+    outline-offset: 2px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.search-box:focus,
+.search-box:focus-visible {
+    outline: 3px solid #1a3a1a;
+    outline-offset: 1px;
+    border-color: var(--primary-color);
+}
+
+.control-btn:focus,
+.control-btn:focus-visible {
+    outline: 3px solid #1a3a1a;
+    outline-offset: 2px;
+}
+
+.btn-primary:focus,
+.btn-primary:focus-visible {
+    outline: 3px solid #1a3a1a;
+    outline-offset: 2px;
+}
+
+.btn-secondary:focus,
+.btn-secondary:focus-visible {
+    outline: 3px solid #1a3a1a;
+    outline-offset: 2px;
+}
+
+.btn-danger:focus,
+.btn-danger:focus-visible {
+    outline: 3px solid #8b0000;
+    outline-offset: 2px;
+}
+
+/* Deck items should be focusable */
+.deck-item {
+    outline: none;
+}
+
+.deck-item:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: -3px;
+    box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.5);
+}
+
+/* Skip link for keyboard navigation (hide by default, show on focus) */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Ensure color contrast meets WCAG AA standards (4.5:1 for text) */
+
+/* Primary green (#4CAF50) on white needs better contrast for text */
+/* Updated to use darker green for better contrast */
+:root {
+    --text-on-green: #fff;
+    --focus-outline: #1a3a1a;
+}

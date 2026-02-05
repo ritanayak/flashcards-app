@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header role="banner">
+        <h1>Flashcards App</h1>
+        <button id="newDeckBtn" aria-label="Create a new deck">+ New Deck</button>
+    </header>
+
+    <div class="container">
+        <nav role="navigation" aria-label="Deck list">
+            <ul id="deckList" class="deck-list">
+                <!-- Decks dynamically inserted here -->
+            </ul>
+            <div id="emptyDecksState" class="empty-state" style="display: none;">
+                <p class="empty-state-message">📚 No decks yet</p>
+                <p class="empty-state-instructions">Click the "+ New Deck" button to create your first deck</p>
+            </div>
+        </nav>
+
+        <main role="main">
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="search-box" 
+                    placeholder="Search cards (question or answer)..." 
+                    aria-label="Search cards"
+                />
+            </div>
+
+            <section id="cardContainer" class="card-container" aria-live="polite">
+                <article id="card" class="card" role="article">
+                    <div class="card-content">
+                        <p id="cardText" class="card-text">Select a deck to start</p>
+                    </div>
+                </article>
+                <div id="emptyCardsState" class="empty-state" style="display: none;">
+                    <p class="empty-state-message">🎯 No cards found</p>
+                    <p class="empty-state-instructions">Try adjusting your search, or add cards to this deck</p>
+                </div>
+            </section>
+
+            <div class="controls" role="toolbar" aria-label="Card controls">
+                <button id="flipBtn" aria-label="Flip card (Space)">Flip (Space)</button>
+                <button id="prevBtn" aria-label="Previous card (Arrow Left)">← Prev (←)</button>
+                <span id="cardCounter" aria-live="polite" class="card-counter">0/0</span>
+                <button id="nextBtn" aria-label="Next card (Arrow Right)">Next (→) →</button>
+                <button id="shuffleBtn" aria-label="Shuffle deck (S)">Shuffle (S)</button>
+            </div>
+        </main>
+    </div>
+
+    <footer role="contentinfo">
+        <p>⌨️ Keyboard Shortcuts: <strong>Space</strong> = Flip | <strong>←</strong> = Previous | <strong>→</strong> = Next | <strong>S</strong> = Shuffle</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
